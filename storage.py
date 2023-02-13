@@ -6,7 +6,7 @@ try:
     account_url = "https://stoaccsandeep.blob.core.windows.net"
 
     # Storage connection string (NOT recommended, used for simplicity for this study)
-    conn_string = os.environ["AZURE_STORAGE_CONNECTION_STRING"]
+    conn_string = "REPLACEME"
 
     # Create the BlobServiceClient object and access the container
     blob_service_client = BlobServiceClient.from_connection_string(conn_string)
