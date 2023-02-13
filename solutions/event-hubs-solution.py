@@ -44,11 +44,18 @@ async def on_event(partition_context, event):
 
 # TODO: Using the Azure SDK reference documentation, complete the recv_messages() method.
 # Hints:
-# 1. Just like the producer code, you will need to create a client to consume events from the Event Hub.
+# 1. Just like the producer code, you will need to create a client to asynchronously consume events from the Event Hub.
 # 2. When creating a client to consume events, set the parameter 'consumer_group' to "$Default"
 # 3. When creating a client to consume events, there is an 'on_event' parameter where you can pass in a method to handle incoming events.
 async def recv_messages():
-    pass
+    consumer = EventHubConsumerClient.from_connection_string(
+        conn_str=EVENT_HUB_CONNECTION_STR, eventhub_name=EVENT_HUB_NAME, consumer_group="$Default",
+    )
+    async with consumer:
+        await consumer.receive(
+               starting_position="-1",  # "-1" is from the beginning of the partition.
+               on_event=on_event
+        )
 
 
 #asyncio.run(send_messages())
