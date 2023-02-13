@@ -29,9 +29,7 @@ def download_blob():
 def list_blobs_in_container():
     try:
         blob_service_client = BlobServiceClient.from_connection_string(STORAGE_CONNECTION_STR)
-        container_name = "test-container"
-        blob_to_access = "test2.txt"
-        container_client = blob_service_client.get_container_client(container=container_name)
+        container_client = blob_service_client.get_container_client(container=STORAGE_CONTAINER_NAME)
         blob_list = container_client.list_blobs()
         for blob in blob_list:
             print(blob.name)

@@ -27,6 +27,7 @@ def upsertItem(id: str, partitionKey: int):
 # SELECT * FROM collection c WHERE c.Elevation = <input-param-from-func> ORDER BY c.Country ASC OFFSET 0 LIMIT <input-param-from-func>
 # Hint: You can re-use the code to create your clients to interact with the CosmosDB.
 def query_by_elevation(elevation: int, limit: int):
+    query = "SELECT * FROM collection c LIMIT 5"
     pass
 
 upsertItem()
