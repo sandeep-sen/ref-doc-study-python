@@ -4,8 +4,9 @@ from azure.eventhub import EventData
 from azure.eventhub.aio import EventHubProducerClient, EventHubConsumerClient
 
 # Event Hubs connection string (NOT recommended, used for simplicity for this study)
-EVENT_HUB_CONNECTION_STR = os.environ['EVENT_HUB_CONNECTION_STR']
-EVENT_HUB_NAME = os.environ['EVENT_HUB_NAME']
+EVENT_HUB_CONNECTION_STR = os.environ["EVENT_HUB_CONNECTION_STR"]
+EVENT_HUB_NAME = os.environ["EVENT_HUB_NAME"]
+
 
 async def send_messages():
     # Create a producer client to send messages to the event hub.
@@ -36,9 +37,14 @@ async def send_messages():
         # Now that you've sent messages, receive them from the Event Hub.
         recv_messages()
 
+
 # Method to handle incoming events
 async def on_event(partition_context, event):
-    print("Received event: {} from partition: {}.".format(event.body_as_str(), partition_context.partition_id))
+    print(
+        "Received event: {} from partition: {}.".format(
+            event.body_as_str(), partition_context.partition_id
+        )
+    )
     await partition_context.update_checkpoint(event)
 
 
@@ -49,14 +55,16 @@ async def on_event(partition_context, event):
 # 3. When creating a client to consume events, there is an 'on_event' parameter where you can pass in a method to handle incoming events.
 async def recv_messages():
     consumer = EventHubConsumerClient.from_connection_string(
-        conn_str=EVENT_HUB_CONNECTION_STR, eventhub_name=EVENT_HUB_NAME, consumer_group="$Default",
+        conn_str=EVENT_HUB_CONNECTION_STR,
+        eventhub_name=EVENT_HUB_NAME,
+        consumer_group="$Default",
     )
     async with consumer:
         await consumer.receive(
-               starting_position="-1",  # "-1" is from the beginning of the partition.
-               on_event=on_event
+            starting_position="-1",  # "-1" is from the beginning of the partition.
+            on_event=on_event,
         )
 
 
-#asyncio.run(send_messages())
+# asyncio.run(send_messages())
 asyncio.run(recv_messages())
