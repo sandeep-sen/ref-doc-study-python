@@ -2,7 +2,7 @@ import os
 import json
 import datetime
 
-from azure.cosmos import CosmosClient, PartitionKey
+from azure.cosmos import CosmosClient
 
 ENDPOINT = os.environ["ENDPOINT"]
 KEY = os.environ["KEY"]

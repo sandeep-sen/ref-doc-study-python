@@ -32,6 +32,7 @@ def download_blob():
 # TODO: Using the Azure SDK reference documentation, complete the list_blobs_in_container() method.
 # Hint: Note the relationship between BlobServiceClient, ContainerClient, and BlobClient.
 def list_blobs_in_container():
+    print("List of blobs in container:")
     try:
         pass
 
@@ -40,6 +41,8 @@ def list_blobs_in_container():
         print(ex)
 
 
-# Code to be executed
-print("Trying to list blobs in container:")
+# Sample code
+# download_blob()
+
+# Problem to be executed by the participant
 list_blobs_in_container()

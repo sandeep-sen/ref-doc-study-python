@@ -1,7 +1,8 @@
 import os
 import json
+import datetime
 
-from azure.cosmos import CosmosClient, PartitionKey
+from azure.cosmos import CosmosClient
 
 ENDPOINT = os.environ["ENDPOINT"]
 KEY = os.environ["KEY"]
@@ -16,11 +17,10 @@ def upsertItem(id: str, partitionKey: int):
     container = database.get_container_client(CONTAINER_NAME)
 
     item = container.read_item(id, partition_key=partitionKey)
-
-    # item updates go here
-
-    # upsert item
-    existing_item = container.upsert_item(item)
+    date_string = datetime.datetime.now().isoformat()
+    item["Region"] = f"Chile-S ({date_string})"
+    response = container.upsert_item(body=item)
+    print("Upserted Item's \n{0}".format(json.dumps(response, indent=True)))
 
 
 # TODO: Using the Azure SDK reference documentation, complete the query() method.
@@ -28,9 +28,9 @@ def upsertItem(id: str, partitionKey: int):
 # SELECT * FROM collection c WHERE c.Elevation = <input-param-from-func> ORDER BY c.Country ASC OFFSET 0 LIMIT <input-param-from-func>
 # Hint: You can re-use the code to create your clients to interact with the CosmosDB.
 def query_by_elevation(elevation: int, limit: int):
-    query = "SELECT * FROM collection c LIMIT 5"
+    query = "SELECT * FROM collection c WHERE c.Elevation = <input-param-from-func> ORDER BY c.Country ASC OFFSET 0 LIMIT <input-param-from-func>"
     pass
 
 
-upsertItem()
-query_by_elevation()
+upsertItem("7408d446-fb51-e70e-9955-560a0c966b68", 0)
+query_by_elevation(0, 5)
