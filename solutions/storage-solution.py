@@ -4,7 +4,7 @@ from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
 # Storage connection string (NOT recommended, used for simplicity for this study)
 STORAGE_CONNECTION_STR = os.environ['STORAGE_CONNECTION_STR']
 STORAGE_CONTAINER_NAME = os.environ['STORAGE_CONTAINER_NAME']
-BLOB_NAME = os.environ['BLOB_NAME']
+BLOB_NAME = "2022-12-22-09-00.txt"
 
 # Sample code explaining the various client objects and some example methods
 def download_blob():
