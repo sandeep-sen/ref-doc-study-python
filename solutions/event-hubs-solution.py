@@ -1,11 +1,11 @@
 import asyncio
-
+import os
 from azure.eventhub import EventData
 from azure.eventhub.aio import EventHubProducerClient, EventHubConsumerClient
 
 # Event Hubs connection string (NOT recommended, used for simplicity for this study)
-EVENT_HUB_CONNECTION_STR = "REPLACE_THIS"
-EVENT_HUB_NAME = "python-eh"
+EVENT_HUB_CONNECTION_STR = os.environ['EVENT_HUB_CONNECTION_STR']
+EVENT_HUB_NAME = os.environ['EVENT_HUB_NAME']
 
 async def send_messages():
     # Create a producer client to send messages to the event hub.

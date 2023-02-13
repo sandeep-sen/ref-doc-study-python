@@ -1,7 +1,9 @@
+import os
 from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
 
+
 # Storage connection string (NOT recommended, used for simplicity for this study)
-STORAGE_CONNECTION_STR = "REPLACE_THIS"
+STORAGE_CONNECTION_STR = os.environ['STORAGE_CONNECTION_STR']
 
 # Sample code explaining the various client objects and some example methods
 def download_blob():

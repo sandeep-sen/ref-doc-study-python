@@ -1,3 +1,4 @@
 azure-storage-blob
 azure-eventhub
 azure-eventhub-checkpointstoreblob-aio
+azure-cosmos
