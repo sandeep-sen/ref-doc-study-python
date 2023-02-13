@@ -3,11 +3,11 @@ import json
 
 from azure.cosmos import CosmosClient, PartitionKey
 
-ENDPOINT = os.environ['ENDPOINT']
-KEY = os.environ['KEY']
+ENDPOINT = os.environ["ENDPOINT"]
+KEY = os.environ["KEY"]
 
-DATABASE_NAME = os.environ['DATABASE_NAME']
-CONTAINER_NAME = os.environ['CONTAINER_NAME']
+DATABASE_NAME = os.environ["DATABASE_NAME"]
+CONTAINER_NAME = os.environ["CONTAINER_NAME"]
 
 # Sample code that upserts (updates or inserts) data  in the CosmosDB.
 def upsertItem(id: str, partitionKey: int):
@@ -22,13 +22,15 @@ def upsertItem(id: str, partitionKey: int):
     # upsert item
     existing_item = container.upsert_item(item)
 
+
 # TODO: Using the Azure SDK reference documentation, complete the query() method.
-# Use the SDK to query the following command on the database: 
+# Use the SDK to query the following command on the database:
 # SELECT * FROM collection c WHERE c.Elevation = <input-param-from-func> ORDER BY c.Country ASC OFFSET 0 LIMIT <input-param-from-func>
 # Hint: You can re-use the code to create your clients to interact with the CosmosDB.
 def query_by_elevation(elevation: int, limit: int):
     query = "SELECT * FROM collection c LIMIT 5"
     pass
+
 
 upsertItem()
 query_by_elevation()
